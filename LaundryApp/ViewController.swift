@@ -13,6 +13,22 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        var url = NSURL(string: "http://www.laundryview.com/lvs.php")
+        
+        if url != nil {
+            let task = NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: { (data, response, error) -> Void in
+                print(data)
+                
+                if error == nil {
+                    
+                    var urlContent = NSString(data: data, encoding: NSASCIIStringEncoding) as NSString!
+                    
+                    print(urlContent)
+                }
+            })
+            task.resume()
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
