@@ -8,27 +8,27 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController , NSXMLParserDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        var url = NSURL(string: "http://www.laundryview.com/lvs.php")
-        
-        if url != nil {
-            let task = NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: { (data, response, error) -> Void in
-                print(data)
-                
-                if error == nil {
-                    
-                    var urlContent = NSString(data: data, encoding: NSASCIIStringEncoding) as NSString!
-                    
-                    print(urlContent)
-                }
-            })
-            task.resume()
-        }
+        var url = NSURL(string: "http://www.laundryview.com/laundry_room.php?lr=1582072")
+        //var url = NSURL(string: "http://example.com/website-with-xml")
+        var xmlParser = NSXMLParser(contentsOfURL: url)
+        xmlParser?.delegate = self
+        xmlParser?.parse()
 
+
+    }
+    
+    func parser(parser: NSXMLParser,
+        didStartElement elementName: String,
+        namespaceURI namespaceURI: String?,
+        qualifiedName qualifiedName: String?,
+        attributes attributeDict: [NSObject : AnyObject]){
+        println("Element's name is \(elementName)")
+        println("Element's attributes are \(attributeDict)")
     }
 
     override func didReceiveMemoryWarning() {
