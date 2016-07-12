@@ -13,7 +13,7 @@ class ViewController: UIViewController , NSXMLParserDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        var url = NSURL(string: "http://www.laundryview.com/laundry_room.php?lr=1582072")
+        var url = NSURL(string: "http://www.laundryview.com/")
         //var url = NSURL(string: "http://example.com/website-with-xml")
         var xmlParser = NSXMLParser(contentsOfURL: url)
         xmlParser?.delegate = self
